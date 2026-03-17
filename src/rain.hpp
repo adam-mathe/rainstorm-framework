@@ -105,6 +105,11 @@ namespace rain
         unsigned int uniform_location = glGetUniformLocation(program, location);
         glUniformMatrix4fv(uniform_location, 1, GL_TRUE, data.m);
     }
+    
+    void setColor(unsigned int program, vector3 color) {
+        unsigned int color_location = glGetUniformLocation(program, "color");
+        glUniform3f(color_location, color.x, color.y, color.z);
+    }
 
     unsigned int shaderProgram(const char *vertex_shader_source, const char *fragment_shader_source) 
     {

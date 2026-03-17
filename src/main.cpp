@@ -34,9 +34,9 @@ static const char* vertex_shader_source =
 static const char* fragment_shader_source =
     "#version 330 core\n"
     "out vec4 finalColor;\n"
-    "uniform vec3 our_color;\n"
+    "uniform vec3 color;\n"
     "void main() {\n"
-    "    finalColor = vec4(1.0, 0.0, 0.0, 1.0f);\n"
+    "    finalColor = vec4(color, 1.0f);\n"
     "}\n";
 
 Game game;
@@ -90,7 +90,7 @@ int main()
     {
         update_window(&game.window);
 
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.12f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glBindBuffer(GL_ARRAY_BUFFER, entity_vbo);
@@ -109,6 +109,80 @@ int main()
 
         rain::setConstant(program, "model", model);
         rain::setConstant(program, "projection", projection);
+
+        rain::setColor(program, vector3(1.0f, 0.0f, 0.0f));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+        model = rain::identity();
+
+        rain::translate(model, vector3(128.0f, -64.0f, 0.0f));
+        rain::scale(model, vector3(64.0f, 64.0f, 1.0f));
+        rain::rotate(model, 45.0f);
+
+        rain::setConstant(program, "model", model);
+
+        rain::setColor(program, vector3(0.0f, 1.0f, 1.0f));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+        model = rain::identity();
+
+        rain::translate(model, vector3(-128.0f, 96.0f, 0.0f));
+        rain::scale(model, vector3(64.0f, 64.0f, 1.0f));
+        rain::rotate(model, 45.0f);
+
+        rain::setConstant(program, "model", model);
+
+        rain::setColor(program, vector3(1.0f, 1.0f, 0.0f));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);;
+
+        model = rain::identity();
+
+        rain::translate(model, vector3(256.0f, -128.0f, 0.0f));
+        rain::scale(model, vector3(128.0f, 128.0f, 1.0f));
+        rain::rotate(model, 15.0f);
+
+        rain::setConstant(program, "model", model);
+
+        rain::setColor(program, vector3(0.0f, 1.0f, 0.0f));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+        model = rain::identity();
+
+        rain::translate(model, vector3(-256.0f, 128.0f, 0.0f));
+        rain::scale(model, vector3(128.0f, 128.0f, 1.0f));
+        rain::rotate(model, -35.0f);
+
+        rain::setConstant(program, "model", model);
+
+        rain::setColor(program, vector3(0.0f, 0.5f, 1.0f));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+        model = rain::identity();
+
+        rain::translate(model, vector3(512.0f, -256.0f, 0.0f));
+        rain::scale(model, vector3(256.0f, 256.0f, 1.0f));
+        rain::rotate(model, -15.0f);
+
+        rain::setConstant(program, "model", model);
+
+        rain::setColor(program, vector3(0.7f, 0.0f, 1.0f));
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+
+        model = rain::identity();
+
+        rain::translate(model, vector3(-512.0f, 256.0f, 0.0f));
+        rain::scale(model, vector3(256.0f, 256.0f, 1.0f));
+        rain::rotate(model, 30.0f);
+
+        rain::setConstant(program, "model", model);
+
+        rain::setColor(program, vector3(1.0f, 0.5f, 0.0f));
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
         
